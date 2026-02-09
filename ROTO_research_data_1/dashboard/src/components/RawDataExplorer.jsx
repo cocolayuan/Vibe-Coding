@@ -1,13 +1,11 @@
 import { useMemo, useState } from 'react'
 import { motion } from 'framer-motion'
-import { ChevronDown, ChevronUp, Search } from 'lucide-react'
+import { Search } from 'lucide-react'
 
 const respondents = ['Sabrina（受访者1）', '受访者2', '受访者3', '受访者4', '受访者5']
 
 const RawDataExplorer = ({ data }) => {
   const [search, setSearch] = useState('')
-  const [sortField, setSortField] = useState('id')
-  const [sortDirection, setSortDirection] = useState('asc')
   const [selectedRespondent, setSelectedRespondent] = useState('Sabrina（受访者1）')
 
   const filteredRows = useMemo(() => {
@@ -21,26 +19,10 @@ const RawDataExplorer = ({ data }) => {
       })
     }
 
-    rows = [...rows].sort((a, b) => {
-      if (sortField === 'id') {
-        return sortDirection === 'asc' ? a.id - b.id : b.id - a.id
-      }
-      return sortDirection === 'asc'
-        ? a.question.localeCompare(b.question)
-        : b.question.localeCompare(a.question)
-    })
+    rows = [...rows].sort((a, b) => a.id - b.id)
 
     return rows
-  }, [data.raw, search, sortField, sortDirection, selectedRespondent])
-
-  const handleSort = (field) => {
-    if (sortField === field) {
-      setSortDirection((prev) => (prev === 'asc' ? 'desc' : 'asc'))
-      return
-    }
-    setSortField(field)
-    setSortDirection('asc')
-  }
+  }, [data.raw, search, selectedRespondent])
 
   return (
     <div className="glass-panel p-4 sm:p-6 space-y-4">
@@ -80,17 +62,11 @@ const RawDataExplorer = ({ data }) => {
           <table className="w-full min-w-[1060px] text-left">
             <thead className="bg-white/5 border-b border-border">
               <tr>
-                <th className="w-[70px]">
-                  <button onClick={() => handleSort('id')} className="px-4 py-3 text-xs text-text-secondary inline-flex items-center gap-1">
-                    NO.
-                    {sortField === 'id' && (sortDirection === 'asc' ? <ChevronUp className="w-3 h-3" /> : <ChevronDown className="w-3 h-3" />)}
-                  </button>
+                <th className="w-[70px] px-4 py-3 text-xs text-text-secondary">
+                  NO.
                 </th>
-                <th className="w-[34%]">
-                  <button onClick={() => handleSort('question')} className="px-4 py-3 text-xs text-text-secondary inline-flex items-center gap-1">
-                    调研提纲 / 问题
-                    {sortField === 'question' && (sortDirection === 'asc' ? <ChevronUp className="w-3 h-3" /> : <ChevronDown className="w-3 h-3" />)}
-                  </button>
+                <th className="w-[34%] px-4 py-3 text-xs text-text-secondary">
+                  调研提纲 / 问题
                 </th>
                 <th className="w-[60%] px-4 py-3 text-xs text-text-secondary">详细回复内容</th>
               </tr>
@@ -114,7 +90,7 @@ const RawDataExplorer = ({ data }) => {
                         transition={{ duration: 0.22 }}
                         className="rounded-2xl border border-border/70 bg-[#22314a99] px-6 py-5"
                       >
-                        <p className={`text-xl sm:text-2xl leading-relaxed font-medium ${isPlaceholder ? 'text-text-tertiary' : 'text-text-secondary'}`}>
+                        <p className={`text-lg sm:text-xl leading-relaxed font-medium ${isPlaceholder ? 'text-text-tertiary' : 'text-text-secondary'}`}>
                           {isPlaceholder ? '0' : answer}
                         </p>
                       </motion.div>
@@ -141,7 +117,7 @@ const RawDataExplorer = ({ data }) => {
               <div key={block.title} className="rounded-xl border border-border/70 bg-white/5 p-3 sm:p-4">
                 <h4 className="text-sm font-medium text-text-primary mb-2">{block.title}</h4>
                 <p className="text-sm text-text-secondary leading-relaxed whitespace-pre-wrap">
-                  {block.items.join('；')}
+                  {block.items.join('；\n')}
                 </p>
               </div>
             ))}

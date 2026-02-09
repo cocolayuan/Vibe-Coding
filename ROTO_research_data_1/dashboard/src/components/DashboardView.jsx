@@ -70,7 +70,6 @@ const DashboardView = ({ data, onNavigate }) => {
 
       <section className="glass-panel p-6 sm:p-8">
         <h3 className="text-base sm:text-lg font-semibold text-text-primary">个人创作经验</h3>
-        <p className="mt-2 text-sm text-text-secondary">先展示 Sabrina 的经验沉淀，其他受访者内容后续补充。</p>
 
         <div className="mt-4 flex flex-wrap gap-2">
           {creatorTabs.map((name) => (
