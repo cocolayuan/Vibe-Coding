@@ -1,0 +1,487 @@
+@import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&display=swap');
+
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+html {
+  scroll-behavior: smooth;
+}
+
+body {
+  font-family: 'Inter', system-ui, sans-serif;
+  background: linear-gradient(180deg, #F0ECFA 0%, #EEF3FC 30%, #F5F0FA 60%, #EDF2FE 100%);
+  background-attachment: fixed;
+  color: #1E1B4B;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+  overflow-x: hidden;
+}
+
+/* ============================================
+   Grid Background - 1:1 from P1_design_style
+   Light, airy grid lines like the reference
+   ============================================ */
+.grid-background {
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  z-index: 0;
+  pointer-events: none;
+  background-image:
+    linear-gradient(rgba(124, 58, 237, 0.02) 1px, transparent 1px),
+    linear-gradient(90deg, rgba(124, 58, 237, 0.02) 1px, transparent 1px);
+  background-size: 60px 60px;
+}
+
+/* ============================================
+   Ambient Mesh Background - flowing color layer
+   ============================================ */
+.ambient-mesh {
+  position: absolute;
+  inset: -50%;
+  width: 200%;
+  height: 200%;
+  z-index: 0;
+  pointer-events: none;
+  background:
+    radial-gradient(ellipse 600px 500px at 20% 30%, rgba(140, 90, 250, 0.45) 0%, transparent 70%),
+    radial-gradient(ellipse 500px 600px at 75% 20%, rgba(6, 182, 212, 0.38) 0%, transparent 70%),
+    radial-gradient(ellipse 550px 450px at 60% 70%, rgba(236, 72, 153, 0.35) 0%, transparent 70%),
+    radial-gradient(ellipse 400px 500px at 30% 80%, rgba(100, 130, 230, 0.40) 0%, transparent 70%);
+  animation: mesh-flow 6s ease-in-out infinite alternate;
+}
+
+@keyframes mesh-flow {
+  0% {
+    transform: translate(0%, 0%) rotate(0deg) scale(1);
+  }
+  25% {
+    transform: translate(5%, -6%) rotate(3deg) scale(1.06);
+  }
+  50% {
+    transform: translate(-6%, 5%) rotate(-2.5deg) scale(0.94);
+  }
+  75% {
+    transform: translate(4%, 3%) rotate(2deg) scale(1.03);
+  }
+  100% {
+    transform: translate(-3%, -4%) rotate(-1.5deg) scale(1.05);
+  }
+}
+
+/* ============================================
+   Gradient Orbs - Background decoration
+   with color-shift and drift animations
+   ============================================ */
+.gradient-orb {
+  position: absolute;
+  border-radius: 50%;
+  filter: blur(80px);
+  pointer-events: none;
+  will-change: transform, background;
+}
+
+.gradient-orb-1 {
+  width: 650px;
+  height: 650px;
+  top: -120px;
+  right: -80px;
+  animation: orb-color-1 4s ease-in-out infinite alternate;
+}
+
+@keyframes orb-color-1 {
+  0% {
+    background: radial-gradient(circle, rgba(140, 90, 250, 0.55) 0%, rgba(236, 72, 153, 0.30) 50%, transparent 70%);
+  }
+  50% {
+    background: radial-gradient(circle, rgba(70, 110, 230, 0.58) 0%, rgba(130, 110, 240, 0.32) 50%, transparent 70%);
+  }
+  100% {
+    background: radial-gradient(circle, rgba(170, 140, 245, 0.52) 0%, rgba(6, 182, 212, 0.30) 50%, transparent 70%);
+  }
+}
+
+.gradient-orb-2 {
+  width: 550px;
+  height: 550px;
+  bottom: 150px;
+  left: -120px;
+  animation: orb-color-2 5s ease-in-out infinite alternate;
+}
+
+@keyframes orb-color-2 {
+  0% {
+    background: radial-gradient(circle, rgba(6, 182, 212, 0.48) 0%, rgba(124, 58, 237, 0.28) 50%, transparent 70%);
+  }
+  50% {
+    background: radial-gradient(circle, rgba(130, 110, 240, 0.50) 0%, rgba(220, 140, 200, 0.30) 50%, transparent 70%);
+  }
+  100% {
+    background: radial-gradient(circle, rgba(70, 110, 230, 0.48) 0%, rgba(147, 109, 250, 0.28) 50%, transparent 70%);
+  }
+}
+
+.gradient-orb-3 {
+  width: 450px;
+  height: 450px;
+  top: 45%;
+  right: -80px;
+  animation: orb-color-3 4.5s ease-in-out infinite alternate;
+}
+
+@keyframes orb-color-3 {
+  0% {
+    background: radial-gradient(circle, rgba(244, 63, 94, 0.38) 0%, rgba(147, 109, 250, 0.24) 50%, transparent 70%);
+  }
+  50% {
+    background: radial-gradient(circle, rgba(220, 140, 200, 0.42) 0%, rgba(70, 110, 230, 0.24) 50%, transparent 70%);
+  }
+  100% {
+    background: radial-gradient(circle, rgba(6, 182, 212, 0.40) 0%, rgba(170, 140, 245, 0.24) 50%, transparent 70%);
+  }
+}
+
+/* Orb drift paths - flowing movement */
+.orb-drift-1 {
+  animation: orb-color-1 4s ease-in-out infinite alternate,
+             drift-1 7s ease-in-out infinite;
+}
+
+.orb-drift-2 {
+  animation: orb-color-2 5s ease-in-out infinite alternate,
+             drift-2 8s ease-in-out infinite;
+}
+
+.orb-drift-3 {
+  animation: orb-color-3 4.5s ease-in-out infinite alternate,
+             drift-3 6s ease-in-out infinite;
+}
+
+@keyframes drift-1 {
+  0%, 100% { transform: translate(0, 0) scale(1); }
+  25% { transform: translate(-70px, 60px) scale(1.10); }
+  50% { transform: translate(50px, -50px) scale(0.90); }
+  75% { transform: translate(60px, 70px) scale(1.08); }
+}
+
+@keyframes drift-2 {
+  0%, 100% { transform: translate(0, 0) scale(1); }
+  25% { transform: translate(65px, -55px) scale(0.92); }
+  50% { transform: translate(-60px, 65px) scale(1.10); }
+  75% { transform: translate(-45px, -60px) scale(0.93); }
+}
+
+@keyframes drift-3 {
+  0%, 100% { transform: translate(0, 0) scale(1); }
+  25% { transform: translate(-55px, -65px) scale(1.08); }
+  50% { transform: translate(70px, 45px) scale(0.91); }
+  75% { transform: translate(35px, -55px) scale(1.06); }
+}
+
+/* P1 style: soft horizontal gradient band at hero bottom */
+.hero-gradient-band {
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  height: 200px;
+  background: linear-gradient(
+    90deg,
+    rgba(140, 90, 250, 0.35) 0%,
+    rgba(236, 72, 153, 0.38) 30%,
+    rgba(251, 191, 36, 0.20) 50%,
+    rgba(6, 182, 212, 0.35) 70%,
+    rgba(140, 90, 250, 0.25) 100%
+  );
+  filter: blur(60px);
+  pointer-events: none;
+}
+
+/* ============================================
+   Glass Card Styles
+   ============================================ */
+.glass-card {
+  background: rgba(255, 255, 255, 0.32);
+  backdrop-filter: blur(40px) saturate(200%);
+  -webkit-backdrop-filter: blur(40px) saturate(200%);
+  border: 1px solid rgba(255, 255, 255, 0.5);
+  border-radius: 20px;
+  box-shadow:
+    0 8px 32px rgba(124, 58, 237, 0.06),
+    inset 0 1px 0 rgba(255, 255, 255, 0.6);
+  transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+.glass-card:hover {
+  background: rgba(255, 255, 255, 0.48);
+  border-color: rgba(167, 139, 250, 0.35);
+  box-shadow:
+    0 16px 48px rgba(124, 58, 237, 0.1),
+    inset 0 1px 0 rgba(255, 255, 255, 0.7);
+  transform: translateY(-4px);
+}
+
+/* Glass Navbar */
+.glass-nav {
+  background: rgba(255, 255, 255, 0.28);
+  backdrop-filter: blur(40px) saturate(200%);
+  -webkit-backdrop-filter: blur(40px) saturate(200%);
+  border: 1px solid rgba(255, 255, 255, 0.45);
+  box-shadow:
+    0 4px 24px rgba(124, 58, 237, 0.05),
+    inset 0 1px 0 rgba(255, 255, 255, 0.5);
+}
+
+/* ============================================
+   Liquid Glass Button
+   ============================================ */
+.liquid-glass-btn {
+  position: relative;
+  overflow: hidden;
+  background: linear-gradient(135deg, #7C3AED, #A78BFA);
+  border: none;
+  border-radius: 14px;
+  color: white;
+  font-weight: 600;
+  cursor: pointer;
+  transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+.liquid-glass-btn::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: -100%;
+  width: 100%;
+  height: 100%;
+  background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.2), transparent);
+  transition: left 0.5s ease;
+}
+
+.liquid-glass-btn:hover::before {
+  left: 100%;
+}
+
+.liquid-glass-btn:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 12px 32px rgba(124, 58, 237, 0.3);
+}
+
+/* Secondary Glass Button */
+.glass-btn-secondary {
+  background: rgba(255, 255, 255, 0.3);
+  backdrop-filter: blur(24px) saturate(180%);
+  -webkit-backdrop-filter: blur(24px) saturate(180%);
+  border: 1px solid rgba(255, 255, 255, 0.5);
+  border-radius: 14px;
+  color: #1E1B4B;
+  font-weight: 500;
+  cursor: pointer;
+  transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+.glass-btn-secondary:hover {
+  background: rgba(255, 255, 255, 0.5);
+  border-color: rgba(167, 139, 250, 0.35);
+  transform: translateY(-2px);
+  box-shadow: 0 8px 24px rgba(124, 58, 237, 0.1);
+}
+
+/* ============================================
+   Badge / Pill
+   ============================================ */
+.glass-badge {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  padding: 6px 16px;
+  background: rgba(255, 255, 255, 0.3);
+  backdrop-filter: blur(20px) saturate(180%);
+  -webkit-backdrop-filter: blur(20px) saturate(180%);
+  border: 1px solid rgba(255, 255, 255, 0.5);
+  border-radius: 100px;
+  font-size: 14px;
+  font-weight: 500;
+  color: #7C3AED;
+}
+
+/* ============================================
+   Animations
+   ============================================ */
+@keyframes float {
+  0%, 100% { transform: translateY(0px); }
+  50% { transform: translateY(-20px); }
+}
+
+@keyframes float-slow {
+  0%, 100% { transform: translateY(0px) rotate(0deg); }
+  50% { transform: translateY(-15px) rotate(3deg); }
+}
+
+.animate-float {
+  animation: float 6s ease-in-out infinite;
+}
+
+.animate-float-slow {
+  animation: float-slow 8s ease-in-out infinite;
+}
+
+/* Hero gradient band color shift */
+.hero-gradient-band {
+  animation: band-shift 5s ease-in-out infinite alternate;
+}
+
+@keyframes band-shift {
+  0% {
+    opacity: 0.9;
+    filter: blur(60px) hue-rotate(0deg);
+  }
+  50% {
+    opacity: 1;
+    filter: blur(65px) hue-rotate(30deg);
+  }
+  100% {
+    opacity: 0.95;
+    filter: blur(60px) hue-rotate(-20deg);
+  }
+}
+
+/* ============================================
+   Chat Bubble Styles (Page 3)
+   ============================================ */
+.chat-bubble-user {
+  background: linear-gradient(135deg, #7C3AED, #A78BFA);
+  color: white;
+  border-radius: 20px 20px 4px 20px;
+  padding: 14px 20px;
+  max-width: 320px;
+  font-size: 14px;
+  line-height: 1.5;
+}
+
+.chat-bubble-ai {
+  background: rgba(255, 255, 255, 0.4);
+  backdrop-filter: blur(24px) saturate(180%);
+  -webkit-backdrop-filter: blur(24px) saturate(180%);
+  border: 1px solid rgba(255, 255, 255, 0.5);
+  border-radius: 20px 20px 20px 4px;
+  padding: 14px 20px;
+  max-width: 360px;
+  font-size: 14px;
+  line-height: 1.5;
+  color: #1E1B4B;
+}
+
+/* ============================================
+   Iridescent Shimmer (Liquid Glass effect)
+   ============================================ */
+@keyframes shimmer {
+  0% { background-position: -200% center; }
+  100% { background-position: 200% center; }
+}
+
+.iridescent-border {
+  position: relative;
+}
+
+.iridescent-border::after {
+  content: '';
+  position: absolute;
+  inset: -1px;
+  border-radius: inherit;
+  padding: 1px;
+  background: linear-gradient(
+    90deg,
+    rgba(124, 58, 237, 0.1),
+    rgba(6, 182, 212, 0.2),
+    rgba(236, 72, 153, 0.15),
+    rgba(124, 58, 237, 0.1)
+  );
+  background-size: 200% 100%;
+  animation: shimmer 4s linear infinite;
+  -webkit-mask: linear-gradient(#fff 0 0) content-box, linear-gradient(#fff 0 0);
+  mask: linear-gradient(#fff 0 0) content-box, linear-gradient(#fff 0 0);
+  -webkit-mask-composite: xor;
+  mask-composite: exclude;
+  pointer-events: none;
+}
+
+/* ============================================
+   Section Ambient Orbs - for Categories & Footer
+   ============================================ */
+.section-orb {
+  position: absolute;
+  border-radius: 50%;
+  filter: blur(100px);
+  pointer-events: none;
+  opacity: 0.6;
+}
+
+.section-orb-1 {
+  width: 500px;
+  height: 500px;
+  top: -100px;
+  left: -150px;
+  background: radial-gradient(circle, rgba(147, 109, 250, 0.25) 0%, rgba(167, 139, 250, 0.1) 50%, transparent 70%);
+  animation: drift-1 16s ease-in-out infinite;
+}
+
+.section-orb-2 {
+  width: 400px;
+  height: 400px;
+  bottom: -80px;
+  right: -100px;
+  background: radial-gradient(circle, rgba(6, 182, 212, 0.2) 0%, rgba(124, 58, 237, 0.08) 50%, transparent 70%);
+  animation: drift-2 18s ease-in-out infinite;
+}
+
+.section-orb-3 {
+  width: 350px;
+  height: 350px;
+  top: 40%;
+  left: 50%;
+  transform: translateX(-50%);
+  background: radial-gradient(circle, rgba(236, 72, 153, 0.15) 0%, rgba(147, 109, 250, 0.08) 50%, transparent 70%);
+  animation: drift-3 14s ease-in-out infinite;
+}
+
+/* ============================================
+   Logo Marquee
+   ============================================ */
+@keyframes marquee-scroll {
+  0% {
+    transform: translateX(0);
+  }
+  100% {
+    transform: translateX(-50%);
+  }
+}
+
+.marquee-track {
+  animation: marquee-scroll 35s linear infinite;
+  will-change: transform;
+}
+
+.marquee-track:hover {
+  animation-play-state: paused;
+}
+
+/* ============================================
+   Reduced Motion
+   ============================================ */
+@media (prefers-reduced-motion: reduce) {
+  *, *::before, *::after {
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.01ms !important;
+  }
+}
